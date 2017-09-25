@@ -6,7 +6,7 @@ It is possible to play 8 bit .wav files that are stored on the SD card formatted
 
 # Description
 
-We use SPI for sending data from SD card to STM32. We use the FatFs library for FAT32 support. A cyclic list has been implemented to store information about files on the SD card. DMA is used to send sound samples to the DAC. The current time of playing song is displayed on the 8 segment display. To control the volume of songs we use module with potentiometer.
+We use SPI for sending data from SD card to STM32. FAT32 support provides the FatFs library. A cyclic list has been implemented to store information about files on the SD card. DMA is used to send sound samples to the DAC. The current time of playing song is displayed on the 8 segment display. To control the volume of songs we use module with potentiometer.
 
 **LED diodes signals** 
 
@@ -71,7 +71,7 @@ and power the speaker (5V)
 - f   ----->  PE13
 - g   ----->  PE14
 - h   ----->  PE15
-- VCC -----> 3V
+- VCC ----->  3V
 - 3   ----->  PE4
 - 2   ----->  PE3
 - 1   ----->  PE2
