@@ -36,45 +36,45 @@ CooCox CoIDE 1.7.8
 
 1. SD card reader module
 
-GND ----->  GND
-5V     ----->  5V
-PB11 ----->  SDCS
-PB15 ----->  MOSI
-PB13 ----->  SCK
-PB14 ----->  MISO
-GND  ----->  GND
+- GND  ----->  GND
+- 5V   ----->  5V
+- PB11 ----->  SDCS
+- PB15 ----->  MOSI
+- PB13 ----->  SCK
+- PB14 ----->  MISO
+- GND  ----->  GND
 
 2. module with speaker, amplifier and potentiometer
 
-VCC   ----->  3V
-GND   ----->  GND
-5V      ----->  5V
-ADC1 ----->  PA1
-AIN     ----->  MOSI
+- VCC  ----->  3V
+- GND  ----->  GND
+- 5V   ----->  5V
+- ADC1 ----->  PA1
+- AIN  ----->  MOSI
 
 and power the speaker (5V)
 
 3. push buttons
 
-G   ----->  VDD
-K0  ----->  PA5
-K1  ----->  PA7
-K2  ----->  PA8
+- G   ----->  VDD
+- K0  ----->  PA5
+- K1  ----->  PA7
+- K2  ----->  PA8
 
 4. module with 8 segment displays
 
-a      ----->  PE8
-b      ----->  PE9
-c      ----->  PE10
-d      ----->  PE11
-e      ----->  PE12
-f       ----->  PE13
-g      ----->  PE14
-h      ----->  PE15
-VCC -----> 3V
-3      ----->  PE4
-2      ----->  PE3
-1      ----->  PE2
+- a   ----->  PE8
+- b   ----->  PE9
+- c   ----->  PE10
+- d   ----->  PE11
+- e   ----->  PE12
+- f   ----->  PE13
+- g   ----->  PE14
+- h   ----->  PE15
+- VCC -----> 3V
+- 3   ----->  PE4
+- 2   ----->  PE3
+- 1   ----->  PE2
 
 To start playback press K0 (PA5) button. 
 
