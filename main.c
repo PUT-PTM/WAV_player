@@ -19,7 +19,7 @@
 #include "stdbool.h"
 #include "display.h"
 
-UINT b =0;
+
 DIR Dir;
 FIL file;
 FILINFO fileInfo;
@@ -27,6 +27,7 @@ FATFS filesystem;
 FRESULT fresult;
 
 uint8_t DAC_Buff[512];
+UINT b =0;
 int8_t change = 0;
 int8_t nr_switch=-1;
 uint32_t nr_track=0;
@@ -273,6 +274,7 @@ void Init_DMA(void)
 	DMA_InitTypeDef dma_init;
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
 	DMA_DeInit(DMA1_Stream5);
+
 	dma_init.DMA_Channel = DMA_Channel_7;
 	dma_init.DMA_PeripheralBaseAddr = (uint32_t)(DAC_BASE + 0x10);
 	dma_init.DMA_Memory0BaseAddr = (uint32_t)&DAC_Buff;
@@ -295,17 +297,19 @@ void Init_DMA(void)
 	DAC_DMACmd(DAC_Channel_1, ENABLE);
 }
 
-//DAC Channel 1
 void Init_DAC(void)
 {
-	DAC_InitTypeDef dac_init;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE);
-	DAC_StructInit(&dac_init);
-	dac_init.DAC_Trigger = DAC_Trigger_T6_TRGO;
-	dac_init.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
-	dac_init.DAC_WaveGeneration = DAC_WaveGeneration_None;
-	DAC_Init(DAC_Channel_1, &dac_init);
+   	RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE); //DAC
+   	DAC_InitTypeDef DAC_InitStructure;
+   	DAC_InitStructure.DAC_Trigger = DAC_Trigger_T6_TRGO;
+   	DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;
+   	DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Enable;
+   	DAC_InitStructure.DAC_LFSRUnmask_TriangleAmplitude = DAC_LFSRUnmask_Bit0;
+   	DAC_Init(DAC_Channel_1, &DAC_InitStructure);
+   	DAC_SetChannel1Data(DAC_Align_12b_R, 0x000);
+   	DAC_Cmd(DAC_Channel_1, ENABLE);
 }
+
 
 //TIM6 wyzwalanie DAC (próbkowanie)
 void Init_TimerForTriggerDAC(void)
@@ -355,13 +359,13 @@ void play(FRESULT fresult, struct List *track)
 
   fresult = f_open( &file, FileName, FA_READ );//otwarcie pliku .WAV do odczytu
   fresult = f_lseek(&file,44);//pominiêcie pierwszych 44 B pliku .WAV
-  f_read (&file,&DAC_Buff[0],512,&cnt);
+  f_read (&file,&DAC_Buff[0],512,&cnt);//pierwszy transfer
 
   if(fresult == FR_OK){change=0;}
   else {time=0;}
 
   TIM_Cmd(TIM3, ENABLE);
-  TIM_Cmd(TIM6, ENABLE);
+  TIM_Cmd(TIM6, ENABLE);//w³¹czenie timera wyzwalaj¹cego DAC
 
 
   while(change == 0)//je¿eli nie wcisniêto przycisku przewiniêcia w przód/cofniêcia
@@ -413,7 +417,7 @@ void play(FRESULT fresult, struct List *track)
      if(cnt<256){break;}
   }
 
-  TIM_Cmd(TIM6, DISABLE);
+  TIM_Cmd(TIM6, DISABLE);//wy³¹czenie timera wyzwalaj¹cego DAC
 
   fresult = f_close(&file);//zamkniêcie pliku .WAV
   time=0;
@@ -440,6 +444,7 @@ int main( void )
 	SPI_SD_Init();
 	disk_initialize(0);
 
+	//odczyt plików opcjonalnie z katalogu
 	fresult = f_mount( &filesystem, 1,1 );
 	fresult = f_opendir(&Dir, "\\");
 
