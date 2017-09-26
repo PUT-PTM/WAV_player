@@ -137,7 +137,6 @@ void TIM5_IRQHandler(void)
 			GPIO_ToggleBits(GPIOD, GPIO_Pin_13);
 			change=1;
 			time=0;
-			//current=current->next;
 		}
 		else if (nr_switch==7)//zatrzymaj/wznow
 		{
@@ -321,7 +320,6 @@ void Init_TimerForTriggerDAC(void)
 	tim_init.TIM_Period = 10;
 	TIM_TimeBaseInit(TIM6, &tim_init);
 	TIM_SelectOutputTrigger(TIM6, TIM_TRGOSource_Update);
-	//TIM_Cmd(TIM6, ENABLE);
 	TIM_Cmd(TIM6, DISABLE);
 }
 

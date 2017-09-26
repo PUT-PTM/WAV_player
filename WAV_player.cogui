@@ -26,13 +26,12 @@
 </info>
 </editorArea>
 <editor id="org.coocox.welcome.ui.WelcomePage" name="" partName="welcome" title="welcome" tooltip="" workbook="DefaultEditorWorkbook">
-<input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">
-<org.coocox.welcome.ui.WelcomePage/>
+<input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">&#x0A;<org.coocox.welcome.ui.WelcomePage/>
 </input>
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="C:/Users/Rybiccy/Documents/GitHub/WAV_player/main.c" title="main.c" tooltip="C:/Users/Rybiccy/Documents/GitHub/WAV_player/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/WAV_player/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="9488" selectionTopPixel="6120"/>
+<editorState selectionHorizontalPixel="0" selectionLength="14633" selectionOffset="0" selectionTopPixel="5130"/>
 </editor>
 </editors>
 <views>
@@ -49,14 +48,14 @@
 <view id="org.coocox.component.ui.ComponentView" partName="Components">
 <viewState/>
 </view>
-<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
-<viewState isPinned="false">
-<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
-<view IMemento.internal.id="org.eclipse.cdt.ui.pdomSearchViewPage" definitionColumnWidth="150" locationColumnWidth="300" matchColumnWidth="300" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2" showEnclosingDefinitions="true"/>
-</viewState>
-</view>
 <view id="org.coocox.codebugger.trace.ui.traceview" partName="Semihosting">
 <viewState/>
+</view>
+<view id="org.eclipse.search.ui.views.SearchView" partName="Search">
+<viewState isPinned="false">
+<view IMemento.internal.id="org.eclipse.cdt.ui.pdomSearchViewPage" definitionColumnWidth="150" locationColumnWidth="300" matchColumnWidth="300" org.eclipse.search.lastActivation="1" org.eclipse.search.resultpage.layout="2" showEnclosingDefinitions="true"/>
+<view IMemento.internal.id="" org.eclipse.search.lastActivation="0"/>
+</viewState>
 </view>
 <view id="org.eclipse.debug.ui.DebugView" partName="Debug">
 <viewState/>
@@ -286,8 +285,29 @@
 <item historyLabel="main.c" index="2">
 <position/>
 </item>
-<item active="true" historyLabel="main.c" index="2">
+<item historyLabel="main.c" index="2">
 <position info="not_deleted" x="323" y="15"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="14286" y="8"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="672" y="8"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="14168" y="8"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="14286" y="8"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="14168" y="8"/>
+</item>
+<item historyLabel="main.c" index="2">
+<position info="not_deleted" x="14286" y="8"/>
+</item>
+<item active="true" historyLabel="main.c" index="2">
+<position info="not_deleted" x="14606" y="8"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -296,19 +316,6 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="WAV_player/main.c">
-<persistable path="/WAV_player/main.c"/>
-</file>
-<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage" name="" tooltip="">
-<persistable>
-<org.coocox.welcome.ui.WelcomePage/>
-</persistable>
-</file>
-<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.welcome.ui.WelcomePage" name="" tooltip="">
-<persistable>
-<org.coocox.welcome.ui.WelcomePage/>
-</persistable>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx.h" tooltip="WAV_player/cmsis_boot/stm32f4xx.h">
 <persistable path="/WAV_player/cmsis_boot/stm32f4xx.h"/>
 </file>
@@ -342,6 +349,15 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ff.c" tooltip="WAW_player/FatFS/ff.c">
 <persistable path="/WAW_player/FatFS/ff.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="list.h" tooltip="WAV__player1/list.h">
+<persistable path="/WAV__player1/list.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f4xx.h" tooltip="STMwavPlayerMR/cmsis_boot/stm32f4xx.h">
+<persistable path="/STMwavPlayerMR/cmsis_boot/stm32f4xx.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="spi_sd.c" tooltip="STMwavPlayerMR/spi_sd.c">
+<persistable path="/STMwavPlayerMR/spi_sd.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="list.h" tooltip="WAV__player1/list.h">
 <persistable path="/WAV__player1/list.h"/>
