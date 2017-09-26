@@ -26,8 +26,8 @@ FILINFO fileInfo;
 FATFS filesystem;
 FRESULT fresult;
 
-int8_t change = 0;
 uint8_t DAC_Buff[512];
+int8_t change = 0;
 int8_t nr_switch=-1;
 uint32_t nr_track=0;
 bool stop = 0;
@@ -355,6 +355,7 @@ void play(FRESULT fresult, struct List *track)
 
   fresult = f_open( &file, FileName, FA_READ );//otwarcie pliku .WAV do odczytu
   fresult = f_lseek(&file,44);//pominiêcie pierwszych 44 B pliku .WAV
+  f_read (&file,&DAC_Buff[0],512,&cnt);
 
   if(fresult == FR_OK){change=0;}
   else {time=0;}
@@ -363,7 +364,7 @@ void play(FRESULT fresult, struct List *track)
   TIM_Cmd(TIM6, ENABLE);
 
 
-  while(change == 0)//je¿eli nie wciniêto przycisku przewiniêcia w przód/cofniêcia
+  while(change == 0)//je¿eli nie wcisniêto przycisku przewiniêcia w przód/cofniêcia
   {
 	 ADC_SoftwareStartConv(ADC1);
 	 while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
@@ -415,7 +416,7 @@ void play(FRESULT fresult, struct List *track)
   TIM_Cmd(TIM6, DISABLE);
 
   fresult = f_close(&file);//zamkniêcie pliku .WAV
-
+  time=0;
 }
 
 
@@ -441,7 +442,6 @@ int main( void )
 
 	fresult = f_mount( &filesystem, 1,1 );
 	fresult = f_opendir(&Dir, "\\");
-
 
 	if(fresult != FR_OK){return(fresult);}
 

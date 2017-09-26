@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -g -nostartfiles -Map=WAV_player.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\WAV_player -TC:\CooCox\CoIDE\configuration\ProgramData\WAV_player/arm-gcc-link.ld -g">
+      <target file="WAV_player.elf" lastModified="15ebdc42254">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="15ebdb8d25a"/>
+         <source file="..\obj\delay.o" lastModified="15ebdb8d323"/>
+         <source file="..\obj\stm32f4xx_dac.o" lastModified="15ebdb8d40b"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="15ebdb8d509"/>
+         <source file="..\obj\main.o" lastModified="15ebdc41edd"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="15ebdb8d7b7"/>
+         <source file="..\obj\stm32f4xx_adc.o" lastModified="15ebdb8d8e3"/>
+         <source file="..\obj\display.o" lastModified="15ebdb8d9db"/>
+         <source file="..\obj\spi_sd.o" lastModified="15ebdb8db50"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="15ebdb8dc38"/>
+         <source file="..\obj\list.o" lastModified="15ebdb8dce1"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="15ebdb8ddc9"/>
+         <source file="..\obj\syscalls.o" lastModified="15ebdb8dea1"/>
+         <source file="..\obj\stm32f4xx_dma.o" lastModified="15ebdb8df9f"/>
+         <source file="..\obj\ff.o" lastModified="15ebdb8e1e3"/>
+         <source file="..\obj\stm32f4xx_spi.o" lastModified="15ebdb8e2ef"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="15ebdb8e3c7"/>
+         <source file="..\obj\misc.o" lastModified="15ebdb8e490"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="15ebdb8e685"/>
+      </target>
+   </processor>
+</history>

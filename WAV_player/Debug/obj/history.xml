@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m4 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F407VG -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\Users\Rybiccy\Documents\GitHub\WAV_player -I..\..\..\..\..\Users\Rybiccy\Documents\GitHub\WAV_player\cmsis_lib\include -I..\..\..\..\..\Users\Rybiccy\Documents -I..\..\..\..\..\Users\Rybiccy\Documents\GitHub\WAV_player\cmsis -I..\..\..\..\..\Users\Rybiccy\Documents\GitHub\WAV_player\FatFs -I..\..\..\..\..\Users\Rybiccy\Documents\GitHub -I..\..\..\..\..\Users\Rybiccy\Documents\GitHub\WAV_player\cmsis_boot -I..\..\..\..\..\Users\Rybiccy\Documents\GitHub\WAV_player\cmsis_lib">
+      <target file="stm32f4xx_exti.o" lastModified="15ebdb8e3c7">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_exti.c" lastModified="15eba7f0ea0"/>
+      </target>
+      <target file="stm32f4xx_gpio.o" lastModified="15ebdb8dc38">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="15eba7ec5ca"/>
+      </target>
+      <target file="display.o" lastModified="15ebdb8d9db">
+         <source file="..\..\..\display.c" lastModified="15eb5ce26a0"/>
+      </target>
+      <target file="stm32f4xx_syscfg.o" lastModified="15ebdb8d25a">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="15eba822c84"/>
+      </target>
+      <target file="startup_stm32f4xx.o" lastModified="15ebdb8d509">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f4xx.c" lastModified="15eba7e468f"/>
+      </target>
+      <target file="stm32f4xx_tim.o" lastModified="15ebdb8e685">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="15eba8001f9"/>
+      </target>
+      <target file="stm32f4xx_adc.o" lastModified="15ebdb8d8e3">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_adc.c" lastModified="15eba8080f6"/>
+      </target>
+      <target file="system_stm32f4xx.o" lastModified="15ebdb8ddc9">
+         <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="15e81fa4c50"/>
+      </target>
+      <target file="misc.o" lastModified="15ebdb8e490">
+         <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="15eba815aec"/>
+      </target>
+      <target file="stm32f4xx_dma.o" lastModified="15ebdb8df9f">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="15eba7fbbf8"/>
+      </target>
+      <target file="stm32f4xx_spi.o" lastModified="15ebdb8e2ef">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="15eba7f76d8"/>
+      </target>
+      <target file="stm32f4xx_rcc.o" lastModified="15ebdb8d7b7">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="15eba7e9636"/>
+      </target>
+      <target file="list.o" lastModified="15ebdb8dce1">
+         <source file="..\..\..\list.c" lastModified="15eb0a46770"/>
+      </target>
+      <target file="stm32f4xx_dac.o" lastModified="15ebdb8d40b">
+         <source file="..\..\..\cmsis_lib\source\stm32f4xx_dac.c" lastModified="15eba80d155"/>
+      </target>
+      <target file="delay.o" lastModified="15ebdb8d323">
+         <source file="..\..\..\delay.c" lastModified="15e81fa4480"/>
+      </target>
+      <target file="syscalls.o" lastModified="15ebdb8dea1">
+         <source file="..\..\..\syscalls\syscalls.c" lastModified="15eba7d0b4d"/>
+      </target>
+      <target file="spi_sd.o" lastModified="15ebdb8db50">
+         <source file="..\..\..\FatFs\spi_sd.c" lastModified="15e9b739970"/>
+      </target>
+      <target file="ff.o" lastModified="15ebdb8e1e3">
+         <source file="..\..\..\FatFs\ff.c" lastModified="15e81fa4c50"/>
+      </target>
+      <target file="main.o" lastModified="15ebdc41edd">
+         <source file="..\..\..\main.c" lastModified="15ebdc415ca"/>
+      </target>
+   </processor>
+</history>
