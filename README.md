@@ -92,7 +92,7 @@ Sometimes while switching tracks, there are loud disruptions.
 
 http://elm-chan.org/fsw/ff/00index_e.html
 
-https://github.com/PUT-PTM/STMwavPlayerMR
+
 
 https://www.youtube.com/watch?v=EYs3f4uwYTo
 
