@@ -40,13 +40,13 @@ CooCox CoIDE 1.7.8
 
 - GND  ----->  GND
 - 5V   ----->  5V
-- PB11 ----->  SDCS
-- PB15 ----->  MOSI
-- PB13 ----->  SCK
-- PB14 ----->  MISO
+- SDCS ----->  PB11
+- MOSI ----->  PB15
+- SCK  ----->  PB13
+- MISO ----->  PB14
 - GND  ----->  GND
 
-2. module with speaker, amplifier and potentiometer
+2. module with speaker, amplifier and volume control.
 
 - VCC  ----->  3V
 - GND  ----->  GND
@@ -91,11 +91,6 @@ Sometimes while switching tracks, there are loud disruptions.
 # Attributions
 
 http://elm-chan.org/fsw/ff/00index_e.html
-
-
-
-
-
 
 # License
 
