@@ -26,7 +26,7 @@ FILINFO fileInfo;
 FATFS filesystem;
 FRESULT fresult;
 
-uint8_t DAC_Buff[512];
+uint8_t Buff[512];
 UINT b =0;
 int8_t change = 0;
 int8_t nr_switch=-1;
@@ -100,6 +100,29 @@ void Init_TIM_display()
 	TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE);
 }
 
+//TIM3 czas na wyswietlacz
+void Init_NVIC_diodes()
+{
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x00;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	TIM_TimeBaseStructure.TIM_Period = 8399;
+	TIM_TimeBaseStructure.TIM_Prescaler = 9999;
+	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
+
+	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+}
+
 //NVIC wywietlacz multipleksowanie
 void Init_NVIC_display()
 {
@@ -166,33 +189,10 @@ void TIM5_IRQHandler(void)
 			delay_ms(500);
 			GPIO_ToggleBits(GPIOD, GPIO_Pin_15);
 		}
-		nr_switch=-1;
-		TIM_Cmd(TIM5, DISABLE);
 		TIM_SetCounter(TIM5, 0);
 		TIM_ClearITPendingBit(TIM5, TIM_IT_Update);
-	}
-}
-
-//TIM5 eliminacja wplywu drgan stykow przyciski PD12 PD14 PD15
-void EXTI9_5_IRQHandler(void)
-{
-	if(EXTI_GetITStatus(EXTI_Line5) != RESET)
-	{
-		nr_switch=5;
-		TIM_Cmd(TIM5, ENABLE);
-		EXTI_ClearITPendingBit(EXTI_Line5);
-	}
-	else if(EXTI_GetITStatus(EXTI_Line7) != RESET)
-	{
-		nr_switch=7;
-		TIM_Cmd(TIM5, ENABLE);
-		EXTI_ClearITPendingBit(EXTI_Line7);
-	}
-	else if(EXTI_GetITStatus(EXTI_Line8) != RESET)
-	{
-		nr_switch=8;
-		TIM_Cmd(TIM5, ENABLE);
-		EXTI_ClearITPendingBit(EXTI_Line8);
+		TIM_Cmd(TIM5, DISABLE);
+		nr_switch=-1;
 	}
 }
 
@@ -218,28 +218,29 @@ void Init_debouncer()
 	TIM_ITConfig(TIM5, TIM_IT_Update, ENABLE);
 }
 
-//TIM3 czas na wyswietlacz
-void Init_NVIC_diodes()
+//TIM5 eliminacja wplywu drgan stykow przyciski PD12 PD14 PD15
+void EXTI9_5_IRQHandler(void)
 {
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-	NVIC_InitTypeDef NVIC_InitStructure;
-	NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x00;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
-	TIM_TimeBaseStructure.TIM_Period = 8399;
-	TIM_TimeBaseStructure.TIM_Prescaler = 9999;
-	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
-
-	TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-	TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+	if(EXTI_GetITStatus(EXTI_Line5) != RESET)
+	{
+		nr_switch=5;
+		TIM_Cmd(TIM5, ENABLE);
+		EXTI_ClearITPendingBit(EXTI_Line5);
+	}
+	else if(EXTI_GetITStatus(EXTI_Line7) != RESET)
+	{
+		nr_switch=7;
+		TIM_Cmd(TIM5, ENABLE);
+		EXTI_ClearITPendingBit(EXTI_Line7);
+	}
+	else if(EXTI_GetITStatus(EXTI_Line8) != RESET)
+	{
+		nr_switch=8;
+		TIM_Cmd(TIM5, ENABLE);
+		EXTI_ClearITPendingBit(EXTI_Line8);
+	}
 }
+
 
 //TIM5 eliminacja wplywu drgan stykow przyciski PD12 PD14 PD15
 void Init_NVIC()
@@ -267,35 +268,6 @@ void Init_NVIC()
 	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOA, EXTI_PinSource8);
 }
 
-//DMA1 Channel7 Stream5  transfer DAC_Buff --> DAC_Channel_1
-void Init_DMA(void)
-{
-	DMA_InitTypeDef dma_init;
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
-	DMA_DeInit(DMA1_Stream5);
-
-	dma_init.DMA_Channel = DMA_Channel_7;
-	dma_init.DMA_PeripheralBaseAddr = (uint32_t)(DAC_BASE + 0x10);
-	dma_init.DMA_Memory0BaseAddr = (uint32_t)&DAC_Buff;
-	dma_init.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-	dma_init.DMA_BufferSize = 512;
-	dma_init.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-	dma_init.DMA_MemoryInc = DMA_MemoryInc_Enable;
-	dma_init.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
-	dma_init.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
-	dma_init.DMA_Mode = DMA_Mode_Circular;
-	dma_init.DMA_Priority = DMA_Priority_High;
-	dma_init.DMA_FIFOMode = DMA_FIFOMode_Disable;
-	dma_init.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
-	dma_init.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-	dma_init.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-
-	DMA_Init(DMA1_Stream5, &dma_init);
-	DMA_Cmd(DMA1_Stream5, ENABLE);
-	DAC_Cmd(DAC_Channel_1, ENABLE);
-	DAC_DMACmd(DAC_Channel_1, ENABLE);
-}
-
 void Init_DAC(void)
 {
    	RCC_APB1PeriphClockCmd(RCC_APB1Periph_DAC, ENABLE); //DAC
@@ -309,16 +281,47 @@ void Init_DAC(void)
    	DAC_Cmd(DAC_Channel_1, ENABLE);
 }
 
+//DMA1 Channel7 Stream5  transfer DAC_Buff --> DAC_Channel_1
+void Init_DMA(void)
+{
+	DMA_InitTypeDef DMA_InitStructure;
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1, ENABLE);
+	DMA_DeInit(DMA1_Stream5);
+
+	DMA_InitStructure.DMA_Channel = DMA_Channel_7;
+	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(DAC_BASE + 0x10);
+	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)&Buff;
+	DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
+	DMA_InitStructure.DMA_BufferSize = 512;
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
+	DMA_InitStructure.DMA_Priority = DMA_Priority_High;
+	DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
+	DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_HalfFull;
+	DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+	DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+
+	DMA_Init(DMA1_Stream5, &DMA_InitStructure);
+	DMA_Cmd(DMA1_Stream5, ENABLE);
+
+	//DAC
+	DAC_Cmd(DAC_Channel_1, ENABLE);
+	DAC_DMACmd(DAC_Channel_1, ENABLE);
+}
 
 //TIM6 wyzwalanie DAC (pr鏏kowanie)
 void Init_TimerForTriggerDAC(void)
 {
-	TIM_TimeBaseInitTypeDef tim_init;
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6, ENABLE);
-	tim_init.TIM_CounterMode = TIM_CounterMode_Up;
-	tim_init.TIM_Prescaler = 190;
-	tim_init.TIM_Period = 10;
-	TIM_TimeBaseInit(TIM6, &tim_init);
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	//sampling rate 44100 Hz
+	TIM_TimeBaseStructure.TIM_Prescaler = 190;
+	TIM_TimeBaseStructure.TIM_Period = 10;
+	TIM_TimeBaseInit(TIM6, &TIM_TimeBaseStructure);
 	TIM_SelectOutputTrigger(TIM6, TIM_TRGOSource_Update);
 	TIM_Cmd(TIM6, DISABLE);
 }
@@ -349,7 +352,7 @@ void Init_ADC()
 //odtwarzanie z danego pliku .WAV
 void play(FRESULT fresult, struct List *track)
 {
-  UINT cnt;
+  UINT ReadBytes;
   char *FileName;
 
   struct List *temp=track;
@@ -357,12 +360,12 @@ void play(FRESULT fresult, struct List *track)
 
   fresult = f_open( &file, FileName, FA_READ );//otwarcie pliku .WAV do odczytu
   fresult = f_lseek(&file,44);//pomini璚ie pierwszych 44 B pliku .WAV
-  f_read (&file,&DAC_Buff[0],512,&cnt);//pierwszy transfer
+  f_read (&file,&Buff[0],512,&ReadBytes);//pierwszy transfer
 
   if(fresult == FR_OK){change=0;}
   else {time=0;}
 
-  TIM_Cmd(TIM3, ENABLE);
+  TIM_Cmd(TIM3, ENABLE);// w章czenie timera odp za aktualny czas
   TIM_Cmd(TIM6, ENABLE);//w章czenie timera wyzwalaj鉍ego DAC
 
 
@@ -380,19 +383,19 @@ void play(FRESULT fresult, struct List *track)
 		 it_st = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_HTIF5);
 	 }
 
-	 f_read (&file,&DAC_Buff[0],256,&cnt);//wype軟ienie 1 po這wy bufora
+	 f_read (&file,&Buff[0],256,&ReadBytes);//wype軟ienie 1 po這wy bufora
 
 	 b=0;
 	 while(b<256)
 	 {
-		 tp =volume*(float)DAC_Buff[b];//uzyskanie zadanej g這snosci
-		 DAC_Buff[b]=tp;
+		 tp =volume*(float)Buff[b];//uzyskanie zadanej g這snosci
+		 Buff[b]=tp;
 		 b++;
 	 }
 
 	 DMA_ClearFlag(DMA1_Stream5, DMA_FLAG_HTIF5);//wyczyszczenie flagi mini璚ia po這wy transferu
 
-	 if(cnt<256){break;}
+	 if(ReadBytes<256){break;}
 
      it_st = RESET;
 
@@ -401,18 +404,18 @@ void play(FRESULT fresult, struct List *track)
     	 it_st = DMA_GetFlagStatus(DMA1_Stream5, DMA_FLAG_TCIF5);
      }
 
-     f_read (&file,&DAC_Buff[256],256,&cnt);//wype軟ienie 2 po這wy bufora
+     f_read (&file,&Buff[256],256,&ReadBytes);//wype軟ienie 2 po這wy bufora
 
 	 while(b<512)
 	 {
-		 tp =volume*(float)DAC_Buff[b];//uzyskanie zadanej g這snosci
-		 DAC_Buff[b]=tp;
+		 tp =volume*(float)Buff[b];//uzyskanie zadanej g這snosci
+		 Buff[b]=tp;
 		 b++;
 	 }
 
      DMA_ClearFlag(DMA1_Stream5, DMA_FLAG_TCIF5 );//wyczyszczenie flagi mini璚ia ca貫go transferu
 
-     if(cnt<256){break;}
+     if(ReadBytes<256){break;}
   }
 
   TIM_Cmd(TIM6, DISABLE);//wy章czenie timera wyzwalaj鉍ego DAC

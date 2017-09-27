@@ -28,12 +28,12 @@
       </source>
       <source file="..\..\..\FatFs\integer.h" lastModified="15e81fa5420">
       </source>
-      <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="15eba815aec">
-         <include file="..\..\..\cmsis_lib\include\misc.h"/>
-      </source>
       <source file="..\..\..\FatFs\ff.c" lastModified="15e81fa5038">
          <include file="..\..\..\FatFs\ff.h"/>
          <include file="..\..\..\FatFs\diskio.h"/>
+      </source>
+      <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="15eba815aec">
+         <include file="..\..\..\cmsis_lib\include\misc.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_rcc.c" lastModified="15eba7e9636">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
@@ -85,11 +85,11 @@
       </source>
       <source file="..\..\..\delay.h" lastModified="15e81fa4480">
       </source>
+      <source file="..\..\..\syscalls\syscalls.c" lastModified="15eba7d1aed">
+      </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="15eba7f76d8">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_spi.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
-      </source>
-      <source file="..\..\..\syscalls\syscalls.c" lastModified="15eba7d1aed">
       </source>
       <source file="..\..\..\cmsis_boot\stm32f4xx_conf.h" lastModified="15eba7e85b7">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_dac.h"/>
