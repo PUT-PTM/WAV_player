@@ -94,9 +94,8 @@ http://elm-chan.org/fsw/ff/00index_e.html
 
 
 
-https://www.youtube.com/watch?v=EYs3f4uwYTo
 
-https://docs.google.com/document/d/1NlmGnWm4J9Ggejky9L2RebkjDlJYtw0F8u_Q_uDKWRM/edit
+
 
 # License
 
