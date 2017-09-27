@@ -8,7 +8,7 @@ It is possible to play 8 bit .wav files that are stored on the SD card formatted
 
 # Description
 
-We use SPI for sending data from SD card to STM32. FAT32 support provides the FatFs library. A cyclic list has been implemented to store information about files on the SD card. DMA is used to send sound samples to the DAC. The current time of playing song is displayed on the 8 segment display. To control the volume of songs we use module with potentiometer.
+We use SPI for sending data from SD card to STM32. FAT32 support provides the FatFs library. A cyclic list has been implemented to store information about files on the SD card. DMA is used to send sound samples to the DAC. The current time of playing song is displayed on the 8 segment display. To control the volume of songs we use module with volume control. Voltage from volume control is appplying to ADC.
 
 **LED diodes signals** 
 
@@ -28,7 +28,7 @@ CooCox CoIDE 1.7.8
 
 3. SD Card formatted to FAT32
 
-4. module with speaker, amplifier for example LM386M and potentiometer
+4. module with speaker, amplifier for example LM386M and volume control
 
 5. module with at least 3 push buttons
 
@@ -54,7 +54,7 @@ CooCox CoIDE 1.7.8
 - ADC1 ----->  PA1
 - AIN  ----->  MOSI
 
-and power the speaker (5V)
+and power the speaker (5V).
 
 3. push buttons
 
@@ -86,7 +86,7 @@ Enough download the project, unpack and compile it with CooCox CoIDE.
 
 # Future improvements
 
-Sometimes while switching tracks, there are loud disruptions
+Sometimes while switching tracks, there are loud disruptions.
 
 # Attributions
 
